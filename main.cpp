@@ -117,9 +117,41 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
-// bool dfs(……) {
-//     // Your code here
-// }
+bool dfs(int r, int c, vector<vector<int>>& maze,vector<vector<int>>& visited,vector<vector<int>>& parent_r,vector<vector<int>>& parent_c, int exit_r, int exit_c) {
+    //if row and column are at the exit, finished
+    if (r == exit_r && c == exit_c) {
+        return true;
+    }
+    //set the row + column value to visited
+    visited[r][c] = true;
+
+    //check 4 neighbors using dr and dc directions
+    for (int d = 0; d < 4; d++) {
+        int nr = r + dc[d];
+        int nc = c + dr[d];
+
+        //make sure new row and new column are inside boundaries, if not then continue
+        if (nr < 0 || nc < 0 || nr >= maze.size() || nc >= maze.size()) {
+            continue;
+        }
+        //check for walls, if it's a wall then continue
+        if (maze[nr][nc] == 1) {
+            continue;
+        }
+        //check if the cell has been visited already, if so continue
+        if (visited[nr][nc] == true) {
+            continue;
+        }
+        //record the parent of new row and column
+        parent_r[nr][nc] = r;
+        parent_c[nr][nc] = c;
+        //recursion using the new row and column
+        if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
+            return true;
+        }
+    }
+
+}
 
 
 // ----------------------------------------------------------
