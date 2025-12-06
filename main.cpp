@@ -131,7 +131,7 @@ bool dfs(int r, int c, vector<vector<int>>& maze,vector<vector<bool>>& visited,v
         int nc = c + dr[d];
 
         //make sure new row and new column are inside boundaries, if not then continue
-        if (nr < 0 || nr >= maze.size() || nc < 0 | nc >= maze.size()) {
+        if (nr < 0 || nr >= maze.size() || nc < 0 | nc >= maze[0].size()) {
             continue;
         }
         //check for walls, if it's a wall then continue
@@ -143,15 +143,17 @@ bool dfs(int r, int c, vector<vector<int>>& maze,vector<vector<bool>>& visited,v
             continue;
         }
         //record the parent of new row and column
-        parent_r[nr][nc] = r;
-        parent_c[nr][nc] = c;
+        if (nr >= 0 && nr < maze.size() && nc >= 0 && nc < maze[0].size()) {
+            parent_r[nr][nc] = r;
+            parent_c[nr][nc] = c;
+        }
+
         //recursion using the new row and column
         if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
             return true;
         }
-        return false;
     }
-
+    return false;
 }
 
 
