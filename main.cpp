@@ -143,10 +143,9 @@ bool dfs(int r, int c, vector<vector<int>>& maze,vector<vector<bool>>& visited,v
             continue;
         }
         //record the parent of new row and column
-        if (nr >= 0 && nr < maze.size() && nc >= 0 && nc < maze[0].size()) {
             parent_r[nr][nc] = r;
             parent_c[nr][nc] = c;
-        }
+
 
         //recursion using the new row and column
         if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
