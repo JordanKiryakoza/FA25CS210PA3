@@ -130,15 +130,15 @@ bool dfs(int r, int c, vector<vector<int>>& maze,vector<vector<bool>>& visited,v
         int nr = r + dc[d];
         int nc = c + dr[d];
 
-        //make sure new row and new column are inside boundaries, if not then continue
+        //make sure new row and new column are inside boundaries, if not then continue to next iteration of the loop (new direction)
         if (nr < 0 || nr >= maze.size() || nc < 0 | nc >= maze[0].size()) {
             continue;
         }
-        //check for walls, if it's a wall then continue
+        //check for walls, if it's a wall then continue to the next iteration of the loop (new direction)
         if (maze[nr][nc] == 1) {
             continue;
         }
-        //check if the cell has been visited already, if so continue
+        //check if the cell has been visited already, if so continue to next iteration of the loop (new direction)
         if (visited[nr][nc] == true) {
             continue;
         }
